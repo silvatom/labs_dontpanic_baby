@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Don't panic baby</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header style="border-style: solid;">
+            <h1>Don't Panic Baby</h1>
+        </header>
+
+        <main style="border-style: solid;">
+            <div class="last-attempt flex">
+                <h2>Last Attempt</h2>
+                <div class="guess flex">
+                    <!-- refatorar esta gambiarra dos inputs. Responsável: Tom -->
+                    <input value="8" disabled>
+                    <input value="*" disabled>
+                    <input value="9" disabled>
+                    <input value="-" disabled>
+                    <input value="3" disabled>
+                    <input value="0" disabled>
+                </div>
+
+                <div class="validation flex">
+                    <input value="X" disabled>
+                    <input value="X" disabled>
+                    <input value="T" disabled>
+                    <input value="X" disabled>
+                    <input value="T" disabled>
+                    <input value="X" disabled>
+                </div>
+            </div>
+            <div class="current-attempt flex">
+                <h2>Current Attempt</h2>
+                <div class="inputs-container flex">
+                    <input id="primeiro" type="text" maxlength="1">
+                    <input id="segundo" type="text" maxlength="1">
+                    <input id="terceiro" type="text" maxlength="1">
+                    <input id="quarto" type="text" maxlength="1">
+                    <input id="quinto" type="text" maxlength="1">
+                    <input id="sexto" type="text" maxlength="1">
+                </div>
+            </div>
+        </main>
+            
+        <footer style="border-style: solid;">
+            <div>Copyleft (c) @42saopaulo</div>
+        </footer>
+
+        <script src="app.js"></script>
+    </body>
+</html>
+
