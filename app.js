@@ -17,9 +17,10 @@ function eventHandlerKeyPress(next, all)
     return (
     function (event) {
         if (event.keyCode === 13 && event.target.value === "") {
-            alert("Digite alguma coisa na caixinha!")
+            document.getElementById("spnError").innerHTML = "Digite alguma coisas na caixinha!"
         }
         else if (event.keyCode === 13) {
+            document.getElementById("spnError").innerHTML = ""
             if (next !== undefined)
             {
                 document.getElementById(next).focus();
@@ -29,11 +30,11 @@ function eventHandlerKeyPress(next, all)
                 {
                     if (all[i].value === "")
                     {
-                        alert("Missing Value");
+                        document.getElementById("spnError").innerHTML = "Missing Value";
                         return(1);
                     }
                 }
-                alert("OK!");
+                document.getElementById("spnError").innerHTML = "OK";
             }
         }
     })
@@ -69,7 +70,7 @@ function eventHandlerInput(inputs, i)
 
 function hello()
 {
-    const ids = ["primeiro", "segundo", "terceiro", "quarto", "quinto", "sexto"]
+    const ids = ["inpPrimeiro", "inpSegundo", "inpTerceiro", "inpQuarto", "inpQuinto", "inpSexto"]
     const inputs = []
 
     for (let i = 0; i < ids.length; i++)

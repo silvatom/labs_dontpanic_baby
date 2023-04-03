@@ -13,6 +13,14 @@
     gap: 8.5px;
 }
 
+#spnError {
+    color: red;
+}
+
+header, main, footer {
+    border-style: solid;
+}
+
 input {
     width: 30px;
     height: 30px;
@@ -22,3 +30,5 @@ input {
 h1 {
     text-align: center
 }
+
+
