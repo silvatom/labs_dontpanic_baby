@@ -3,12 +3,6 @@ import sys
 sys.path.append("../")
 from do_calc import do_calc
 
-# FUNÇÃO(expr.) -> retorna TRUE_FALSE 
-# 	calcular espressão (parametro) -> resultado
-# 		performa calculo******************
-# 		    verifica precedencia
-
-
 # no maximo: 2 operadores 4 inteiros
 # minimo: 1 operador e 5 inteiros 
 def test_result_2():
