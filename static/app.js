@@ -1,19 +1,35 @@
-/*
-    TO DO:
+baseUrl = "http://127.0.0.1:8000/"
+var watcher = 0;
 
-    VALIDAÇÕES:
-        DONE - 1 character por caixa
-        DONE - Caracterer deve ser APENAS:
-            número
-            operadores: *, /, +, -
-        DONE - OPERADOR:
-            Não pode estar no início ou no fim
-            Devem sempre estar entre números
-        
-*/
+function anyThing(all)
+{
+    let elements = document.getElementsByClassName("elements");
+    let values = []
+    for (let i = 0; i < elements.length; i++)
+    {
+        values.push(elements[i].value);
+    }
+
+    const valuesJSON = JSON.stringify({
+        equation: values
+    });
+    //console.log(valuesJSON);
+    return fetch(baseUrl + "hahaha", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: valuesJSON
+    }).then((res) => {
+        console.log(res.json())
+        console.log(res)
+        // return (res.json());
+    });
+} 
 
 function eventHandlerKeyPress(next, all)
 {
+    ++watcher;
     return (
     function (event) {
         if (event.keyCode === 13 && event.target.value === "") {
@@ -35,16 +51,18 @@ function eventHandlerKeyPress(next, all)
                     }
                 }
                 document.getElementById("spnError").innerHTML = "OK";
+                anyThing(all);
             }
         }
     })
+    
 }
 
 function eventHandlerInput(inputs, i)
 {
     return (
         function (event) {
-            const validNumbers = ["0", "1", "2", "3", "4", "5", "7", "8", "9"]
+            const validNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
             const validOperators = ["*", "/", "-", "+"]
             if (!validNumbers.includes(inputs[i].value) && !validOperators.includes(inputs[i].value))
             {
@@ -72,16 +90,30 @@ function hello()
 {
     const ids = ["inpPrimeiro", "inpSegundo", "inpTerceiro", "inpQuarto", "inpQuinto", "inpSexto"]
     const inputs = []
-
+    
     for (let i = 0; i < ids.length; i++)
     {
         inputs.push(document.getElementById(ids[i]))
         inputs[i].addEventListener("input", eventHandlerInput(inputs, i))
         inputs[i].addEventListener("keydown", eventHandlerKeyPress(ids[i + 1], inputs))
     }
+    //TODO:
+        // construir a lista com a "tentativa"
+        // loop dos componentes
 }
 
-hello()
+hello();
+/**
+function setHints(hints) {
+  const tiles = document.getElementsByClassName("hint");
+  for (let i = 0; i < tiles.length; i++) {
+    const tile = tiles[i];
+    tile.textContent = hints[i];
+    setHintColor(tile);
+  }
+}
+*/
+
 
 
 
