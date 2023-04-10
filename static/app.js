@@ -37,6 +37,15 @@ function insertHintIntoFront(hints)
     }
 }
 
+function insertLastAttempIntoFront(attempt)
+{   
+    let attempt_box = document.getElementsByClassName('last-expr')
+    for (let i = 0; i < attempt_box.length; i++)
+    {
+        attempt_box[i].value = attempt[i];
+    }
+}
+
 function eventHandlerKeyPress(next, all)
 {
     return (
@@ -64,6 +73,7 @@ function eventHandlerKeyPress(next, all)
 
                 hints = await performFetch(all, exprAttempt);
                 // inserir as hints nos componentes do front
+                insertLastAttempIntoFront(exprAttempt)
                 insertHintIntoFront(hints.hints);
                 // colocar expAttempt nos input de cima
             }
