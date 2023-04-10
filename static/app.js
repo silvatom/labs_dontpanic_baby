@@ -1,29 +1,31 @@
 baseUrl = "http://127.0.0.1:8000/"
 var watcher = 0;
 
-function anyThing(all)
+// Get expression from html components (attempt)
+function getExpressionAttempt()
 {
     let elements = document.getElementsByClassName("elements");
-    let values = []
+    let expression = []
     for (let i = 0; i < elements.length; i++)
     {
-        values.push(elements[i].value);
+        expression.push(elements[i].value);
     }
+    return (expression)
+}
 
+function performFetch(all, attempt)
+{
     const valuesJSON = JSON.stringify({
-        equation: values
+        equation: exprAttempt
     });
-    //console.log(valuesJSON);
-    return fetch(baseUrl + "hahaha", {
+    return fetch(baseUrl + "getHints", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: valuesJSON
     }).then((res) => {
-        console.log(res.json())
-        console.log(res)
-        // return (res.json());
+        return(res.json());
     });
 } 
 
@@ -31,7 +33,7 @@ function eventHandlerKeyPress(next, all)
 {
     ++watcher;
     return (
-    function (event) {
+    async function (event) {
         if (event.keyCode === 13 && event.target.value === "") {
             document.getElementById("spnError").innerHTML = "Digite alguma coisas na caixinha!"
         }
@@ -51,7 +53,10 @@ function eventHandlerKeyPress(next, all)
                     }
                 }
                 document.getElementById("spnError").innerHTML = "OK";
-                anyThing(all);
+                exprAttempt = getExpressionAttempt();
+
+                hints = await performFetch(all, exprAttempt);
+                console.log(hints);
             }
         }
     })
@@ -86,7 +91,7 @@ function eventHandlerInput(inputs, i)
     )
 }
 
-function hello()
+function setEvents()
 {
     const ids = ["inpPrimeiro", "inpSegundo", "inpTerceiro", "inpQuarto", "inpQuinto", "inpSexto"]
     const inputs = []
@@ -97,24 +102,9 @@ function hello()
         inputs[i].addEventListener("input", eventHandlerInput(inputs, i))
         inputs[i].addEventListener("keydown", eventHandlerKeyPress(ids[i + 1], inputs))
     }
-    //TODO:
-        // construir a lista com a "tentativa"
-        // loop dos componentes
 }
 
-hello();
-/**
-function setHints(hints) {
-  const tiles = document.getElementsByClassName("hint");
-  for (let i = 0; i < tiles.length; i++) {
-    const tile = tiles[i];
-    tile.textContent = hints[i];
-    setHintColor(tile);
-  }
-}
-*/
-
-
+setEvents();
 
 
 

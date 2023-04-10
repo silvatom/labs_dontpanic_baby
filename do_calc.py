@@ -3,7 +3,7 @@
 # 		performa calculo******************
 # 		    verifica precedencia
 
-rightExpression = ["1","+","1","+","4","0"]
+rightExpression = ["1","*","2","+","4","0"]
 
 def getExprResult(equation_elements: list) -> int:
     inp_str = ''.join(equation_elements)
@@ -20,8 +20,6 @@ def isRightExpression(inp_equation: list, exp_equation: list) -> bool:
     
 
 def check_elems(inp_equation: list, exp_equation: list) -> list:
-    # if (len(inp_equation) != len(exp_equation)):
-    #     return []
     result = []
     loop_size = len(inp_equation)
     
@@ -35,10 +33,10 @@ def check_elems(inp_equation: list, exp_equation: list) -> list:
                 result.append("x")
     return (result)
 
-def main_function(exprListGuess: list):
+def main_function(exprListGuess: list) -> list:
     result = getExprResult(exprListGuess)
     if (is_42(result) != True):
-        return ("Equação Inválida!") #só retorna tentativa anterior
+        return ([]) #só retorna tentativa anterior
     if (isRightExpression(exprListGuess, rightExpression) == True):
         return (["C","C","C","C","C","C"]) # você venceu!
     hintsList = check_elems(exprListGuess, rightExpression)
