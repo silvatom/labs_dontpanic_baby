@@ -1,5 +1,4 @@
 baseUrl = "http://127.0.0.1:8000/"
-var watcher = 0;
 
 // Get expression from html components (attempt)
 function getExpressionAttempt()
@@ -27,11 +26,19 @@ function performFetch(all, attempt)
     }).then((res) => {
         return(res.json());
     });
-} 
+}
+
+function insertHintIntoFront(hints)
+{
+    let hintContainer = document.getElementsByClassName('hints');
+    for (let i = 0; i < hints.length; i++)
+    {
+        hintContainer[i].value = hints[i].toUpperCase();
+    }
+}
 
 function eventHandlerKeyPress(next, all)
 {
-    ++watcher;
     return (
     async function (event) {
         if (event.keyCode === 13 && event.target.value === "") {
@@ -56,7 +63,9 @@ function eventHandlerKeyPress(next, all)
                 exprAttempt = getExpressionAttempt();
 
                 hints = await performFetch(all, exprAttempt);
-                console.log(hints);
+                // inserir as hints nos componentes do front
+                insertHintIntoFront(hints.hints);
+                // colocar expAttempt nos input de cima
             }
         }
     })
