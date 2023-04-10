@@ -1,7 +1,7 @@
 import pytest
 import sys
 sys.path.append("../")
-from do_calc import do_calc
+from do_calc import getExprResult
 
 # no maximo: 2 operadores 4 inteiros
 # minimo: 1 operador e 5 inteiros 
@@ -11,7 +11,7 @@ def test_result_2():
     inp_front = ['1', '+', '1']
 
     # action
-    result = do_calc(inp_front)
+    result = getExprResult(inp_front)
     # assert
     assert result == expected_result
 
@@ -21,7 +21,7 @@ def test_result_42():
     inp_front = ['8', '*', '9', '-', '3', '0']
 
     # action
-    result = do_calc(inp_front)
+    result = getExprResult(inp_front)
     # assert
     assert result == expected_result
 
@@ -31,7 +31,7 @@ def test_result_42_precedence():
     inp_front = ['3', '0', '-', '8', '*', '9']
 
     # action
-    result = do_calc(inp_front)
+    result = getExprResult(inp_front)
     # assert
     assert result == expected_result
 

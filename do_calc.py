@@ -3,14 +3,16 @@
 # 		performa calculo******************
 # 		    verifica precedencia
 
-def do_calc(equation_elements: list) -> int:
+rightExpression = ["1","+","1","+","4","0"]
+
+def getExprResult(equation_elements: list) -> int:
     inp_str = ''.join(equation_elements)
     return (eval(inp_str))
 
 def is_42(number: int) -> bool:
 	return (number == 42)
 
-def is_expected_equation(inp_equation: list, exp_equation: list) -> bool:
+def isRightExpression(inp_equation: list, exp_equation: list) -> bool:
     elements_str = ''.join(inp_equation)
     equation_str = ''.join(exp_equation)
 
@@ -32,3 +34,12 @@ def check_elems(inp_equation: list, exp_equation: list) -> list:
             else:
                 result.append("x")
     return (result)
+
+def main_function(exprListGuess: list):
+    result = getExprResult(exprListGuess)
+    if (is_42(result) != True):
+        return ("Equação Inválida!") #só retorna tentativa anterior
+    if (isRightExpression(exprListGuess, rightExpression) == True):
+        return (["C","C","C","C","C","C"]) # você venceu!
+    hintsList = check_elems(exprListGuess, rightExpression)
+    return (hintsList)
