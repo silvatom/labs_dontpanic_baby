@@ -1,13 +1,17 @@
-# FUNÇÃO(expr.) -> retorna TRUE_FALSE 
-# 	calcular espressão (parametro) -> resultado
-# 		performa calculo******************
-# 		    verifica precedencia
-
-rightExpression = ["1","*","2","+","4","0"]
+rightExpression = ["8","*","9","-","3","0"]
 
 def getExprResult(equation_elements: list) -> int:
-    inp_str = ''.join(equation_elements)
-    return (eval(inp_str))
+    result_str = ''
+    aux = ''
+    for elem in equation_elements:
+        if elem.isdigit():
+            aux += elem
+        else:
+            result_str += str(int(aux))
+            result_str += elem
+            aux = ''
+    result_str += str(int(aux))
+    return (eval(result_str))
 
 def is_42(number: int) -> bool:
 	return (number == 42)
@@ -17,7 +21,6 @@ def isRightExpression(inp_equation: list, exp_equation: list) -> bool:
     equation_str = ''.join(exp_equation)
 
     return elements_str == equation_str
-    
 
 def check_elems(inp_equation: list, exp_equation: list) -> list:
     result = []

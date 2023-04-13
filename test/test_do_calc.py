@@ -35,7 +35,30 @@ def test_result_42_precedence():
     # assert
     assert result == expected_result
 
+# ['0', '1', '6', '4', '/', '0', '4']
+def test_leading_zero():
+    expect_result = 42
+    input_front = ['1', '6', '8', '/', '0', '4']
 
+    result = getExprResult(input_front)
+
+    assert result == expect_result
+
+def test_leading_zero_starts_with_zero():
+    expect_result = 42
+    input_front = ['0', '1', '6', '8', '/', '0', '4']
+
+    result = getExprResult(input_front)
+
+    assert result == expect_result
+
+def test_leading_zero_more_operetors():
+    expect_result = 217
+    input_front = ['0', '1', '2', '+', '2', '+', '0', '-', '0', '1', '+', '2', '0', '4', '-','0']
+
+    result = getExprResult(input_front)
+
+    assert result == expect_result
 # Preparar o teste
 # Rodar as asserções
 # Verificar o teste

@@ -31,9 +31,14 @@ function performFetch(all, attempt)
 function insertHintIntoFront(hints)
 {
     let hintContainer = document.getElementsByClassName('hints');
-    for (let i = 0; i < hints.length; i++)
+    if (hints.length === 0)
+        document.getElementById("spnError").innerHTML = "Expressão inválida!";
+    for (let i = 0; i < hintContainer.length; i++)
     {
-        hintContainer[i].value = hints[i].toUpperCase();
+        if (hints.length === 0)
+            hintContainer[i].value = ""
+        else
+            hintContainer[i].value = hints[i].toUpperCase();
     }
 }
 
@@ -73,8 +78,8 @@ function eventHandlerKeyPress(next, all)
 
                 hints = await performFetch(all, exprAttempt);
                 // inserir as hints nos componentes do front
-                insertLastAttempIntoFront(exprAttempt)
                 insertHintIntoFront(hints.hints);
+                insertLastAttempIntoFront(exprAttempt)
                 // colocar expAttempt nos input de cima
             }
         }
@@ -124,9 +129,3 @@ function setEvents()
 }
 
 setEvents();
-
-
-
-
-
-
