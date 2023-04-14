@@ -1,6 +1,15 @@
 # Don't Panic Baby
+
+## Summary
+* [**Introdução**](#introdução)
+* [**Regras do Jogo**](#regras-do-jogo)
+* [**Pré Requisitos**](#pré-requisitos)
+* [**Instalação**](#instalação)
+
+## Introdução
 Este projeto consiste em um jogo divertido para aprender os conceitos e tecnologias no mundo web atual.
 O jogo consiste em tentar descobrir a equação que resulta em "42". Cada tentativa deve ter como resultado o número alvo (42) e depois de cada tentativa, "characteres dicas" serão fornecido, exibindo o quão próximo você está de advinhar a equação secreta.
+
 ## Regras do Jogo
 
 Digite uma equação que o resultado seja 42. Characteres serão retornados, descrevendo o quão próximo a sua equação palpite está da equação escondida.
@@ -25,8 +34,13 @@ Uma vez que o repositório tenha sido clonado, os passos seguintes devem ser exe
 ```
     
 ## Developer Section
+
+<details>
+<summary>Click para expandir</summary>
+
 O fluxograma a seguir descreve o fluxo dos dados. O mesmo foi usado para projetar a aplicação.
 
+![Fluxogram describing data processing in the program](assets/dpbaby_flux.png "Text to show on mouseover")
 
-![alt text for screen readers](assets/dpbaby_flux.png "Text to show on mouseover")
+</details>
 
