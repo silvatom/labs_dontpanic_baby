@@ -5,7 +5,7 @@
 * [**Regras do Jogo**](#regras-do-jogo)
 * [**Pré Requisitos**](#pré-requisitos)
 * [**Instalação**](#instalação)
-* [**Developer Section**](#developer-section)
+* [**Desenvolvedores**](#desenvolvedores)
 
 ## Introdução
 Este projeto consiste em um jogo divertido para aprender os conceitos e tecnologias no mundo web atual.
@@ -34,7 +34,7 @@ Uma vez que o repositório tenha sido clonado, os passos seguintes devem ser exe
   uvicorn main:app --reload
 ```
     
-## Developer Section
+## Desenvolvedores
 Seção destinada para descrição de itens interessantes principalmente para desenvolvedores, podendo ser irrelevante para usuários comuns.
 
 <details>
