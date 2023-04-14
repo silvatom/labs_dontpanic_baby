@@ -1,7 +1,7 @@
 import pytest
 import sys
 sys.path.append("../")
-from do_calc import getExprResult
+from calculator import getExprResult
 
 # no maximo: 2 operadores 4 inteiros
 # minimo: 1 operador e 5 inteiros 

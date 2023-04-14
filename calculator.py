@@ -1,4 +1,4 @@
-rightExpression = ["8","*","9","-","3","0"]
+right_expression = ["8","*","9","-","3","0"]
 
 def getExprResult(equation_elements: list) -> int:
     result_str = ''
@@ -13,34 +13,31 @@ def getExprResult(equation_elements: list) -> int:
     result_str += str(int(aux))
     return (eval(result_str))
 
-def is_42(number: int) -> bool:
-	return (number == 42)
-
 def isRightExpression(inp_equation: list, exp_equation: list) -> bool:
     elements_str = ''.join(inp_equation)
     equation_str = ''.join(exp_equation)
 
     return elements_str == equation_str
 
-def check_elems(inp_equation: list, exp_equation: list) -> list:
+def checkElems(inp_equation: list, exp_equation: list) -> list:
     result = []
     loop_size = len(inp_equation)
     
     for i in range(loop_size):
         if (inp_equation[i] == exp_equation[i]):
-            result.append("c")
+            result.append("C")
         else:
             if inp_equation[i] in exp_equation:
-                result.append("t")
+                result.append("T")
             else:
-                result.append("x")
+                result.append("X")
     return (result)
 
-def main_function(exprListGuess: list) -> list:
-    result = getExprResult(exprListGuess)
-    if (is_42(result) != True):
+def main_function(expr_list_guess: list) -> list:
+    result = getExprResult(expr_list_guess)
+    if (result != 42):
         return ([]) #só retorna tentativa anterior
-    if (isRightExpression(exprListGuess, rightExpression) == True):
+    if (isRightExpression(expr_list_guess, right_expression) == True):
         return (["C","C","C","C","C","C"]) # você venceu!
-    hintsList = check_elems(exprListGuess, rightExpression)
-    return (hintsList)
+    hints_list = checkElems(expr_list_guess, right_expression)
+    return (hints_list)

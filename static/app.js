@@ -1,4 +1,4 @@
-baseUrl = "http://127.0.0.1:8000/"
+baseUrl = "http://labs-cidadao-do-mundo.42sp.org.br:5015/"
 
 // Get expression from html components (attempt)
 function getExpressionAttempt()
@@ -12,17 +12,17 @@ function getExpressionAttempt()
     return (expression)
 }
 
-function performFetch(all, attempt)
+function performFetch(attempt)
 {
-    const valuesJSON = JSON.stringify({
-        equation: exprAttempt
+    const values_JSON = JSON.stringify({
+        equation: attempt
     });
     return fetch(baseUrl + "getHints", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: valuesJSON
+        body: values_JSON
     }).then((res) => {
         return(res.json());
     });
@@ -30,15 +30,15 @@ function performFetch(all, attempt)
 
 function insertHintIntoFront(hints)
 {
-    let hintContainer = document.getElementsByClassName('hints');
+    let hint_container = document.getElementsByClassName('hints');
     if (hints.length === 0)
         document.getElementById("spnError").innerHTML = "Expressão inválida!";
-    for (let i = 0; i < hintContainer.length; i++)
+    for (let i = 0; i < hint_container.length; i++)
     {
         if (hints.length === 0)
-            hintContainer[i].value = ""
+            hint_container[i].value = ""
         else
-            hintContainer[i].value = hints[i].toUpperCase();
+            hint_container[i].value = hints[i].toUpperCase();
     }
 }
 
@@ -51,10 +51,26 @@ function insertLastAttempIntoFront(attempt)
     }
 }
 
-function eventHandlerKeyPress(next, all)
+function cleanInputs(all)
+{
+    for (let i = 0; i < all.length; i++)
+    {
+        all[i].value = "";
+    }
+    all[0].focus();
+}
+
+function eventHandlerKeyPress(all, index, next)
 {
     return (
     async function (event) {
+        if (event.keyCode === 8 && index > 0) {
+            if (all[index].value === ""){
+                all[index - 1].value = "";
+                all[index - 1].focus();
+            }
+            all[index].value = "";
+        }
         if (event.keyCode === 13 && event.target.value === "") {
             document.getElementById("spnError").innerHTML = "Digite alguma coisas na caixinha!"
         }
@@ -69,48 +85,57 @@ function eventHandlerKeyPress(next, all)
                 {
                     if (all[i].value === "")
                     {
-                        document.getElementById("spnError").innerHTML = "Missing Value";
+                        document.getElementById("spnError").innerHTML = "Digite alguma coisas na caixinha!";
                         return(1);
                     }
                 }
-                document.getElementById("spnError").innerHTML = "OK";
-                exprAttempt = getExpressionAttempt();
-
-                hints = await performFetch(all, exprAttempt);
-                // inserir as hints nos componentes do front
+                expr_attempt = getExpressionAttempt();
+                hints = await performFetch(expr_attempt);
                 insertHintIntoFront(hints.hints);
-                insertLastAttempIntoFront(exprAttempt)
-                // colocar expAttempt nos input de cima
+                insertLastAttempIntoFront(expr_attempt);
+                cleanInputs(all);
+                count = 0;
+                for (i = 0; i < hints.hints.length; i++)
+                {
+                    if (hints.hints[i].toUpperCase() === "C")
+                        count++;
+                }
+                if (count === 6)
+                {
+                    alert("Parabéns!!!")
+                }
             }
         }
     })
-    
 }
 
-function eventHandlerInput(inputs, i)
+function eventHandlerInput(inputs, i, all)
 {
     return (
         function (event) {
-            const validNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-            const validOperators = ["*", "/", "-", "+"]
-            if (!validNumbers.includes(inputs[i].value) && !validOperators.includes(inputs[i].value))
+            const valid_numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+            const valid_operators = ["*", "/", "-", "+"]
+            if (!valid_numbers.includes(inputs[i].value) && !valid_operators.includes(inputs[i].value))
             {
                 inputs[i].value = "";
                 return(1);
             }
-            if (((i === 0 || i === 5) && validOperators.includes(inputs[i].value)))
+            if (((i === 0 || i === 5) && valid_operators.includes(inputs[i].value)))
             {
                 inputs[i].value = "";
                 return(1);
             }
             if (i !== 0 && i !== 5)
             {
-                if (validOperators.includes(event.target.value) &&
-                    (validOperators.includes(inputs[i-1].value) || validOperators.includes(inputs[i+1].value)))
+                if (valid_operators.includes(event.target.value) &&
+                    (valid_operators.includes(inputs[i-1].value) || valid_operators.includes(inputs[i+1].value)))
                 {
                     inputs[i].value = "";
+                    return(1);
                 }
             }
+            if (inputs[i + 1] !== undefined)
+                inputs[i + 1].focus();
         }
     )
 }
@@ -119,12 +144,12 @@ function setEvents()
 {
     const ids = ["inpPrimeiro", "inpSegundo", "inpTerceiro", "inpQuarto", "inpQuinto", "inpSexto"]
     const inputs = []
-    
+
     for (let i = 0; i < ids.length; i++)
     {
         inputs.push(document.getElementById(ids[i]))
-        inputs[i].addEventListener("input", eventHandlerInput(inputs, i))
-        inputs[i].addEventListener("keydown", eventHandlerKeyPress(ids[i + 1], inputs))
+        inputs[i].addEventListener("input", eventHandlerInput(inputs, i, ids))
+        inputs[i].addEventListener("keydown", eventHandlerKeyPress(inputs, i, ids[i + 1]))
     }
 }
 

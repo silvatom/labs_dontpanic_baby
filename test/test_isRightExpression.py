@@ -1,7 +1,7 @@
 import pytest
 import sys
 sys.path.append("../")
-from do_calc import isRightExpression
+from calculator import isRightExpression
 
 def test_is_expected_1():
     equation = ["1", "+", "41"]
