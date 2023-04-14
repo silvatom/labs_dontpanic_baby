@@ -5,6 +5,7 @@
 * [**Regras do Jogo**](#regras-do-jogo)
 * [**Pré Requisitos**](#pré-requisitos)
 * [**Instalação**](#instalação)
+* [**Developer Section**](#developer-section)
 
 ## Introdução
 Este projeto consiste em um jogo divertido para aprender os conceitos e tecnologias no mundo web atual.
@@ -34,13 +35,21 @@ Uma vez que o repositório tenha sido clonado, os passos seguintes devem ser exe
 ```
     
 ## Developer Section
+Seção destinada para descrição de itens interessantes principalmente para desenvolvedores, podendo ser irrelevante para usuários comuns.
 
 <details>
-<summary>Click para expandir</summary>
+<summary>Clique para expandir</summary>
+
+### Fluxograma
 
 O fluxograma a seguir descreve o fluxo dos dados. O mesmo foi usado para projetar a aplicação.
 
 ![Fluxogram describing data processing in the program](assets/dpbaby_flux.png "Text to show on mouseover")
+
+### Pastas
+* **assets** Recursos para composição da documentação do projeto.
+* **static** Arquivos do frontend.
+* **test** Arquivos relacionados aos tests. Entre na pasta e execute-o com o comando ``pytest``.
 
 </details>
 
